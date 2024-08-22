@@ -23,7 +23,6 @@ import java.nio.file.Files;
 import java.time.Duration;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import junit.framework.TestCase;
-import net.bytebuddy.utility.RandomString;
 
 import java.io.File;
 import java.io.IOException;
