@@ -11,6 +11,7 @@ use Ittest for report
 
 # run the test 
 to run the test  run simply run test file in java run
+got to selenium-automation  - src-test run selenium.java
 
 # report generation
 Had used extent report dependency to create trest report like for comparision i had created a report where it will give that
