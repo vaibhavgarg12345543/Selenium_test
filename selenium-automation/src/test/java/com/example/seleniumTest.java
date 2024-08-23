@@ -11,9 +11,9 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.ITestResult;
-import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import com.aventstack.extentreports.ExtentReports;
@@ -47,7 +47,7 @@ public class seleniumTest
     private ExtentTest test;
     private String id ;
 
-    @BeforeMethod
+    @BeforeTest
     public void setUp() {
        WebDriverManager.chromedriver().setup();
        ChromeOptions options = new ChromeOptions();
@@ -70,8 +70,11 @@ public class seleniumTest
     @Test
     public void buyOProduct() throws InterruptedException, IOException {
              //-- load amazone url
+             test = report.createTest("buyProduct ", "buy product in flipkart and amazon site");
              driver.get("https://www.amazon.in");
              captureScreenshot("amazon_homepage"+id+".png");
+             test.addScreenCaptureFromPath(screenShotPath+"amazon_homepage"+id+".png");
+
 
 
              //-- searchBox for amazone
@@ -79,6 +82,8 @@ public class seleniumTest
              searchBox.sendKeys("Titan Watch");
              searchBox.sendKeys(Keys.ENTER);
              captureScreenshot("amazon_search"+id+".png");
+            test.addScreenCaptureFromPath(screenShotPath+"amazon_search"+id+".png");
+
             
              //-- waiat for 10 second to load list and collect all data for first product
              waitTime.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[contains(text(),'Titan')]")));
@@ -90,6 +95,8 @@ public class seleniumTest
              System.out.println("Amazon Product Price: "+productPrice);
              System.out.println("Amazon Product Link: "+productLink);
              captureScreenshot("amazon_product"+id+".png");
+            test.addScreenCaptureFromPath(screenShotPath+"amazon_product"+id+".png");
+
 
 
              WebElement product1 = driver.findElement(By.cssSelector(".s-main-slot .s-result-item h2 a"));
@@ -115,6 +122,8 @@ public class seleniumTest
              WebElement proceedToBuy = waitTime.until(ExpectedConditions.visibilityOfElementLocated(By.name("proceedToRetailCheckout")));
              proceedToBuy.click();
              captureScreenshot("amazon_checkout"+id+".png");
+            test.addScreenCaptureFromPath(screenShotPath+"amazon_checkout"+id+".png");
+
 
              //-- after click on buy it will redirected to login first
              waitTime.until(ExpectedConditions.visibilityOfElementLocated(By.id("continue-announce")));
@@ -126,6 +135,8 @@ public class seleniumTest
              //-- Search same product in flipkart 
              driver.get("https://www.flipkart.com");
              captureScreenshot("flipkart_homepage"+id+".png");
+            test.addScreenCaptureFromPath(screenShotPath+"flipkart_homepage"+id+".png");
+
 
 
              //use product name from amazone test case and serach in flipkart
@@ -133,6 +144,8 @@ public class seleniumTest
             flipkartSearch.sendKeys(productName);
             flipkartSearch.sendKeys(Keys.ENTER);
             captureScreenshot("flipkart_search"+id+".png");
+            test.addScreenCaptureFromPath(screenShotPath+"flipkart_search"+id+".png");
+
 
             //-- selecting the first product on flipkart
             WebElement flipkartFirsProduct = driver.findElement(By.xpath("(//a[contains(text(),'Titan Smart 3')])[1]/.."));
@@ -142,6 +155,8 @@ public class seleniumTest
             System.out.println("Flipkart Product Link: "+flipkartProductLink);
             flipkartFirsProduct.click();
             captureScreenshot("flipkart_product"+id+".png");
+            test.addScreenCaptureFromPath(screenShotPath+"flipkart_product"+id+".png");
+
 
              //-- switch tabs when we click on product on flipkart
              for(String windowHandles : driver.getWindowHandles())
@@ -156,6 +171,8 @@ public class seleniumTest
              driver.findElement(By.xpath("//span[contains(text(),'Check')]")).click();
              Thread.sleep(10000);
              captureScreenshot("flipkart_availability"+id+".png");
+            test.addScreenCaptureFromPath(screenShotPath+"flipkart_availability"+id+".png");
+
 
 
 
@@ -166,9 +183,11 @@ public class seleniumTest
 
              //--place order on flipkart
              Thread.sleep(10000);
-             WebElement flipkartPlaceOrder = driver.findElement(By.xpath("//span[contains(text(),'Place Order')]"));
+             WebElement flipkartPlaceOrder = waitTime.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[contains(text(),'Place Order')]")));
              flipkartPlaceOrder.click();
             captureScreenshot("flipkart_checkout"+id+".png");
+            test.addScreenCaptureFromPath(screenShotPath+"flipkart_checkout"+id+".png");
+
 
              //--when checkout call happen
              waitTime.until(ExpectedConditions.urlContains("https://www.flipkart.com/checkout"));
@@ -184,6 +203,7 @@ public class seleniumTest
              test = report.createTest("compareProduct", "compare price to buy product in flipkart and amazon site");
              driver.get("https://www.amazon.in");
              captureScreenshot("amazon_homepage1"+id+".png");
+             test.addScreenCaptureFromPath(screenShotPath+"amazon_homepage1"+id+".png");
 
 
              //-- searchBox for amazone
@@ -191,6 +211,8 @@ public class seleniumTest
              searchBox.sendKeys("Titan Watch");
              searchBox.sendKeys(Keys.ENTER);
              captureScreenshot("amazon_search1"+id+".png");
+             test.addScreenCaptureFromPath(screenShotPath+"amazon_search1"+id+".png");
+
             
              //-- waiat for 10 second to load list and collect all data for first product
              waitTime.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[contains(text(),'Titan')]")));
@@ -202,11 +224,15 @@ public class seleniumTest
              System.out.println("Amazon Product Price: "+productPrice);
              System.out.println("Amazon Product Link: "+productLink);
              captureScreenshot("amazon_product1"+id+".png");
+             test.addScreenCaptureFromPath(screenShotPath+"amazon_product1"+id+".png");
+
 
 
              //-- Search same product in flipkart 
              driver.get("https://www.flipkart.com");
              captureScreenshot("flipkart_homepage1"+id+".png");
+             test.addScreenCaptureFromPath(screenShotPath+"flipkart_homepage1"+id+".png");
+
 
 
              //use product name from amazone test case and serach in flipkart
@@ -214,6 +240,8 @@ public class seleniumTest
             flipkartSearch.sendKeys(productName);
             flipkartSearch.sendKeys(Keys.ENTER);
             captureScreenshot("flipkart_search1"+id+".png");
+            test.addScreenCaptureFromPath(screenShotPath+"flipkart_search1"+id+".png");
+
 
             //-- selecting the first product on flipkart
             WebElement flipkartFirsProduct = driver.findElement(By.xpath("(//a[contains(text(),'Titan Smart 3')])[1]/.."));
@@ -222,6 +250,8 @@ public class seleniumTest
             System.out.println("Flipkart Product Price: "+flipkartProductPrice);
             System.out.println("Flipkart Product Link: "+flipkartProductLink);
             captureScreenshot("flipkart_product1"+id+".png");
+            test.addScreenCaptureFromPath(screenShotPath+"flipkart_product1"+id+".png");
+
 
             double flipkartPrice = Double.parseDouble(flipkartProductPrice.replace("₹","").replace(",", "").trim());
             System.out.println("Current price for flipkart is : "+flipkartPrice);
@@ -249,6 +279,40 @@ public class seleniumTest
 
     }
 
+    @Test
+    public void comparisionForpriceFailedTest() throws IOException{
+             //--to add test in report 
+             try {test = report.createTest("compareFailedProduct", "compare price to buy product in flipkart and amazon site");
+             driver.get("https://www.amazon.in");
+             captureScreenshot("amazon_homepage12"+id+".png");
+             test.addScreenCaptureFromPath(screenShotPath+"amazon_homepage1"+id+".png");
+
+
+             //-- searchBox for amazone
+             WebElement searchBox = driver.findElement(By.id("twotabsearchtextbox"));
+             searchBox.sendKeys("Titan Watch");
+             searchBox.sendKeys(Keys.ENTER);
+             captureScreenshot("amazon_search12"+id+".png");
+             test.addScreenCaptureFromPath(screenShotPath+"amazon_search1"+id+".png");
+
+            
+             //-- waiat for 10 second to load list and collect all data for first product
+             waitTime.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[contains(text(),'Titan')]")));
+             WebElement product = driver.findElement(By.xpath("(#div[contains(@class,'rush-component s-featured-result-item s-expand-height')])[1]"));}
+             
+             catch (Exception e) {
+                test.fail("Test failed due to exception: " + e.getMessage());
+                try {
+                    captureScreenshot("failure_" + id + ".png");
+                    test.addScreenCaptureFromPath(screenShotPath + "failure_amazon" + id + ".png");
+                } catch (IOException ioException) {
+                    test.fail("Failed to capture screenshot: " + ioException.getMessage());
+                }
+            }
+   
+
+    }
+
     //--screenshot feature
     private void captureScreenshot(String ScreenshotName) throws IOException {
         File screenShot =((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
@@ -261,10 +325,13 @@ public class seleniumTest
         if(result.getStatus()==ITestResult.FAILURE)
         {
             System.out.println("Test failed: "+ result.getName());
+            test.fail(result.getName() + " failed");
+            test.fail(result.getThrowable());
+            
         }
     }
 
-    @AfterClass
+    @AfterTest
     public void tearDown() {
         if (driver != null) {
             driver.quit();

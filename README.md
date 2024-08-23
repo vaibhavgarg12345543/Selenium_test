@@ -1,55 +1,52 @@
+# Setup
 
+1. *Initial Setup:*
+   - Ensure Java and Maven (MVN) are installed and configured in your IDE (VSCode, IntelliJ, etc.).
+   - Create a GitHub repository for your project.
+   - Add a README file to your repository.
 
-# Setup 
-first need to set java and mvn in your vscode , intellij or anything u are using 
-create github repo and provide a readme file 
-set up dependencied for TestNG , selenium , file , allure , webdriver manager etc
-use xpath css selecter to get element and click them 
-for screen shots you can add dependecy allure testing or open qa selenium 
-use Ittest for report 
+2. *Project Setup:*
+   - Create a Maven project in your IDE.
+   - Configure your pom.xml to include dependencies for TestNG, Selenium, WebDriverManager, Aventstack, and other required libraries.
+3. *Writing Tests:*
+   - Use XPath and CSS selectors to locate and interact with web elements in your test cases.
+   - Capture screenshots as needed.
+   - For reports, use Extent Reports to generate detailed HTML reports for test results.
 
+4. *Running Tests:*
+   - To execute your tests, run the test file using Java. Navigate to src/test/java and run SeleniumTest.java.
 
-# run the test 
-to run the test  run simply run test file in java run
-got to selenium-automation  - src-test run selenium.java
+5. *Report Generation:*
+   - Extent Reports is used to create test reports. The report is an HTML file that provides a comparative analysis of products.
+   - Note: Update the paths for reports and screenshots according to your directory structure. The default paths are set for a specific desktop configuration, and may need adjustment to avoid "path not found" errors.
 
-# report generation
-Had used extent report dependency to create trest report like for comparision i had created a report where it will give that
-which is the best app for product 
-this is an html typoe report 
+6. *Cypress Testing:*
+   - Cypress does not support window switching, which is needed for certain UI 
+   automations (e.g., adding items to the cart). Hence, Selenium was used for such scenarios.
 
+## Selenium Tests
 
-# important 
-for report and screenshot i had mentioned path according to my desktop 
-you can change it according to your desktop then test it other wise it will throw path is not found error
-i had setup random values to given differ name for report and screen shot
+1. *Amazon:*
+   - Open the Amazon URL.
+   - Search for a product, click on the first result, and save the product name, price, and link.
+   - Add the item to the cart, proceed to checkout, and confirm the checkout window.
 
+2. *Flipkart:*
+   - Open the Flipkart URL.
+   - Search for a product, click on the first result, and save the product data.
+   - Add the item to the cart, proceed to checkout, and confirm the checkout page.
 
-# cypress test
-In cypress there is no option for windows switch 
-when we do amzon or flipkart ui automation there is a window switch at add to cart for desktop windows
-so i used selenium
+3. *Comparison:*
+   - Compare product prices between Amazon and Flipkart.
+   - Log the output to identify the better option based on price.
 
-# Selenium_test
-ui testing through selenium
-
-# Amazon
-load amaazone url 
-Search a product in amazon
-clicked on first product 
-save  name, price, link for the prodc=uct in variables 
-add to cart the item 
-proceed to buy 
-confirm that window is going for checkout
-
-# flipkart 
-load flipkart url 
-search the product in search bar ...taking product name saved in amazon run 
-clicked on first product 
-saved data 
-add to cart proceed to buy 
-confirm the checkout page 
-
-# comopared
-compared the price on amazon and flipkart both to check which is better and log the out put for less price
-
+## Backend Test
+- For amazon and flipkart we need bearer key and without paying for that we can not access aws client id and api keyt 
+- For test we can use httpclient where
+   - make a request by giving product name in api 
+   - provide bearer api key for Oauth
+   - call the get or post call ..like for search get call will be implemented
+   - Httpget request and call excute operation of httpclient 
+   - response will be there and we can easily parse the json body and get price and product name 
+   - we can use product name in flipkart like i had used amazon product name in flipkart tp shhow 
+   - we can compare price also by this 
