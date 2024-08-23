@@ -1,1 +1,0 @@
-{"uuid":"5265dbe0-5756-447c-b298-3375257c3960","name":"com.example.seleniumTest.setUp","children":["58f6f324-7fc6-4dea-9955-7a5ee924c84d"],"description":"","befores":[{"name":"setUp","status":"passed","stage":"finished","description":"","steps":[],"attachments":[],"parameters":[],"start":1724391734220,"stop":1724391735993}],"afters":[],"start":1724391734220,"stop":1724391735993}

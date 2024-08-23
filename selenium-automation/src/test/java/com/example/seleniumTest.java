@@ -95,7 +95,7 @@ public class seleniumTest
              System.out.println("Amazon Product Price: "+productPrice);
              System.out.println("Amazon Product Link: "+productLink);
              captureScreenshot("amazon_product"+id+".png");
-            test.addScreenCaptureFromPath(screenShotPath+"amazon_product"+id+".png");
+             test.addScreenCaptureFromPath(screenShotPath+"amazon_product"+id+".png");
 
 
 
@@ -114,15 +114,15 @@ public class seleniumTest
              WebElement addToCart = waitTime.until(ExpectedConditions.visibilityOfElementLocated(By.id("add-to-cart-button")));
              addToCart.click();
 
-            //  //-- move to cart 
+             //-- move to cart 
              WebElement moveToCart = waitTime.until(ExpectedConditions.visibilityOfElementLocated(By.id("nav-cart")));
              moveToCart.click();
 
-            //  //-- proceed to buy
+             //-- proceed to buy
              WebElement proceedToBuy = waitTime.until(ExpectedConditions.visibilityOfElementLocated(By.name("proceedToRetailCheckout")));
              proceedToBuy.click();
              captureScreenshot("amazon_checkout"+id+".png");
-            test.addScreenCaptureFromPath(screenShotPath+"amazon_checkout"+id+".png");
+             test.addScreenCaptureFromPath(screenShotPath+"amazon_checkout"+id+".png");
 
 
              //-- after click on buy it will redirected to login first
@@ -135,27 +135,27 @@ public class seleniumTest
              //-- Search same product in flipkart 
              driver.get("https://www.flipkart.com");
              captureScreenshot("flipkart_homepage"+id+".png");
-            test.addScreenCaptureFromPath(screenShotPath+"flipkart_homepage"+id+".png");
+             test.addScreenCaptureFromPath(screenShotPath+"flipkart_homepage"+id+".png");
 
 
 
              //use product name from amazone test case and serach in flipkart
              WebElement flipkartSearch = driver.findElement(By.name("q"));
-            flipkartSearch.sendKeys(productName);
-            flipkartSearch.sendKeys(Keys.ENTER);
-            captureScreenshot("flipkart_search"+id+".png");
-            test.addScreenCaptureFromPath(screenShotPath+"flipkart_search"+id+".png");
+             flipkartSearch.sendKeys(productName);
+             flipkartSearch.sendKeys(Keys.ENTER);
+             captureScreenshot("flipkart_search"+id+".png");
+             test.addScreenCaptureFromPath(screenShotPath+"flipkart_search"+id+".png");
 
 
-            //-- selecting the first product on flipkart
-            WebElement flipkartFirsProduct = driver.findElement(By.xpath("(//a[contains(text(),'Titan Smart 3')])[1]/.."));
-            String flipkartProductLink = flipkartFirsProduct.findElement(By.cssSelector("a")).getAttribute("href");
-            String flipkartProductPrice = flipkartFirsProduct.findElement(By.cssSelector("a div div.Nx9bqj")).getText();
-            System.out.println("Flipkart Product Price: "+flipkartProductPrice);
-            System.out.println("Flipkart Product Link: "+flipkartProductLink);
-            flipkartFirsProduct.click();
-            captureScreenshot("flipkart_product"+id+".png");
-            test.addScreenCaptureFromPath(screenShotPath+"flipkart_product"+id+".png");
+             //-- selecting the first product on flipkart
+             WebElement flipkartFirsProduct = driver.findElement(By.xpath("(//a[contains(text(),'Titan Smart 3')])[1]/.."));
+             String flipkartProductLink = flipkartFirsProduct.findElement(By.cssSelector("a")).getAttribute("href");
+             String flipkartProductPrice = flipkartFirsProduct.findElement(By.cssSelector("a div div.Nx9bqj")).getText();
+             System.out.println("Flipkart Product Price: "+flipkartProductPrice);
+             System.out.println("Flipkart Product Link: "+flipkartProductLink);
+             flipkartFirsProduct.click();
+             captureScreenshot("flipkart_product"+id+".png");
+             test.addScreenCaptureFromPath(screenShotPath+"flipkart_product"+id+".png");
 
 
              //-- switch tabs when we click on product on flipkart
@@ -171,7 +171,7 @@ public class seleniumTest
              driver.findElement(By.xpath("//span[contains(text(),'Check')]")).click();
              Thread.sleep(10000);
              captureScreenshot("flipkart_availability"+id+".png");
-            test.addScreenCaptureFromPath(screenShotPath+"flipkart_availability"+id+".png");
+             test.addScreenCaptureFromPath(screenShotPath+"flipkart_availability"+id+".png");
 
 
 
@@ -185,20 +185,20 @@ public class seleniumTest
              Thread.sleep(10000);
              WebElement flipkartPlaceOrder = waitTime.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[contains(text(),'Place Order')]")));
              flipkartPlaceOrder.click();
-            captureScreenshot("flipkart_checkout"+id+".png");
-            test.addScreenCaptureFromPath(screenShotPath+"flipkart_checkout"+id+".png");
+             captureScreenshot("flipkart_checkout"+id+".png");
+             test.addScreenCaptureFromPath(screenShotPath+"flipkart_checkout"+id+".png");
 
 
              //--when checkout call happen
              waitTime.until(ExpectedConditions.urlContains("https://www.flipkart.com/checkout"));
 
              //--print current url 
-            System.out.println("Current URL for flipkart is : "+driver.getCurrentUrl());
+             System.out.println("Current URL for flipkart is : "+driver.getCurrentUrl());
            
     }
 
     @Test
-    public void comparisionForpriceTest() throws IOException{
+    public void comparisionForpriceTest() throws IOException, InterruptedException{
              //--to add test in report 
              test = report.createTest("compareProduct", "compare price to buy product in flipkart and amazon site");
              driver.get("https://www.amazon.in");
@@ -215,7 +215,6 @@ public class seleniumTest
 
             
              //-- waiat for 10 second to load list and collect all data for first product
-             waitTime.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[contains(text(),'Titan')]")));
              WebElement product = driver.findElement(By.xpath("(//div[contains(@class,'rush-component s-featured-result-item s-expand-height')])[1]"));
              String productName = product.findElement(By.cssSelector("h2 a")).getText();
              String productPrice =product.findElement(By.cssSelector(".a-price-whole")).getText();
@@ -296,7 +295,7 @@ public class seleniumTest
              test.addScreenCaptureFromPath(screenShotPath+"amazon_search1"+id+".png");
 
             
-             //-- waiat for 10 second to load list and collect all data for first product
+             //-- wait for 10 second to load list and collect all data for first product
              waitTime.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[contains(text(),'Titan')]")));
              WebElement product = driver.findElement(By.xpath("(#div[contains(@class,'rush-component s-featured-result-item s-expand-height')])[1]"));}
              
