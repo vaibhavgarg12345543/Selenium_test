@@ -40,7 +40,7 @@ public class seleniumTest
 {
     private WebDriver driver;
     private WebDriverWait waitTime;
-    private final String screenShotPath = "C:/Users/Vaibhav/Pictures/Screenshots/";
+    private final String screenShotPath = "C:/Users/Vaibhav/Pictures/Screenshots/";  // -- change the screenshot path
 
     private ExtentReports report;
     private ExtentSparkReporter extentReport;
@@ -57,7 +57,7 @@ public class seleniumTest
        id = String.valueOf(System.currentTimeMillis());
 
        //--for a test report
-       extentReport= new ExtentSparkReporter("C:/Users/Vaibhav/Downloads/Reports/reports.html"+id+"");
+       extentReport= new ExtentSparkReporter("C:/Users/Vaibhav/Downloads/Reports/reports.html"+id+"");  //-- change the xpath according to your desktop
        extentReport.config().setDocumentTitle("Selenium report");
        extentReport.config().setReportName("TestReport");
        extentReport.config().setTheme(Theme.STANDARD);
@@ -68,7 +68,7 @@ public class seleniumTest
     }
 
     @Test
-    public void buyOProduct() throws InterruptedException, IOException {
+    public void buyOFProduct() throws InterruptedException, IOException {
              //-- load amazone url
              test = report.createTest("buyProduct ", "buy product in flipkart and amazon site");
              driver.get("https://www.amazon.in");
@@ -86,7 +86,7 @@ public class seleniumTest
 
             
              //-- waiat for 10 second to load list and collect all data for first product
-             waitTime.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[contains(text(),'Titan')]")));
+             Thread.sleep(5000);
              WebElement product = driver.findElement(By.xpath("(//div[contains(@class,'rush-component s-featured-result-item s-expand-height')])[1]"));
              String productName = product.findElement(By.cssSelector("h2 a")).getText();
              String productPrice =product.findElement(By.cssSelector(".a-price-whole")).getText();
